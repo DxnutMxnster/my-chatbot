@@ -1,0 +1,207 @@
+/* ---------- Colors (light mode) ---------- */
+:root {
+  --accent: #1F3C9E; /* deep royal blue (replaced automatically from config.js) */
+  --bg: #8f96a1;     /* stormy gray */
+  --card: #ffffff;
+  --text: #14161a;
+  --muted: #3f454f;
+  --border: #7a818c;
+  --user-bubble-text: #ffffff;
+  --bot-bubble: #f1f3f6;
+}
+
+/* ---------- Dark mode (follows your device setting) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #2b3038;   /* darker storm gray */
+    --card: #363c46;
+    --text: #eef0f4;
+    --muted: #a9b0bc;
+    --border: #4a515c;
+    --bot-bubble: #3d4450;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--bg);
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--accent);
+  color: #fff;
+}
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.brand-emoji { font-size: 28px; }
+.brand h1 { margin: 0; font-size: 20px; }
+.brand p { margin: 0; font-size: 13px; opacity: 0.9; }
+.actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-ghost { background: rgba(255,255,255,0.18); color: #fff; }
+.modal .btn-ghost { background: var(--border); color: var(--text); }
+
+/* ---------- Messages ---------- */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  line-height: 1.45;
+  font-size: 15px;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.bubble p { margin: 0 0 8px; }
+.bubble p:last-child, .bubble ul:last-child { margin-bottom: 0; }
+.bubble ul { margin: 0 0 8px; padding-left: 20px; }
+.bubble.bot {
+  align-self: flex-start;
+  background: var(--bot-bubble);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px;
+}
+.bubble.user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: var(--user-bubble-text);
+  border-bottom-right-radius: 4px;
+}
+.bubble.error {
+  align-self: flex-start;
+  background: #fff1f1;
+  color: #8a1c1c;
+  border: 1px solid #f0b4b4;
+}
+@media (prefers-color-scheme: dark) {
+  .bubble.error { background: #3a1b1b; color: #ffb4b4; border-color: #6b2b2b; }
+}
+
+/* ---------- Thinking animation ---------- */
+.thinking { display: flex; gap: 5px; padding: 14px 16px; }
+.thinking span {
+  width: 8px; height: 8px;
+  background: var(--muted);
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+.thinking span:nth-child(2) { animation-delay: 0.15s; }
+.thinking span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ---------- Starter buttons ---------- */
+.starters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 16px 10px;
+}
+.starters.hidden { display: none; }
+.starter-btn {
+  background: var(--card);
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+.starter-btn:hover { background: var(--accent); color: #fff; }
+
+/* ---------- Message box ---------- */
+.composer {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: var(--card);
+  border-top: 1px solid var(--border);
+}
+.composer textarea {
+  flex: 1;
+  resize: none;
+  max-height: 140px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px; /* 16px stops iPhones zooming in */
+}
+.composer textarea:focus { outline: 2px solid var(--accent); }
+
+/* ---------- Pop-up ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 10;
+}
+.modal.hidden { display: none; }
+.modal-card {
+  background: var(--card);
+  color: var(--text);
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  padding: 20px;
+}
+.modal-card h2 { margin: 0 0 8px; font-size: 18px; }
+.modal-card p { margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.modal-card input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+}
+.remember { display: flex; align-items: center; gap: 8px; margin: 12px 0 4px; font-size: 14px; }
+.key-status { min-height: 18px; font-size: 13px; margin: 6px 0 0; }
+.modal-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
