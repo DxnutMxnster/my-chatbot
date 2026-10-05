@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kinetix</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-emoji" id="botEmoji"></span>
+        <div>
+          <h1 id="botName"></h1>
+          <p id="botTagline"></p>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" id="newChatBtn" class="btn btn-ghost">New chat</button>
+        <button type="button" id="apiKeyBtn" class="btn btn-ghost">API key</button>
+      </div>
+    </header>
+
+    <main id="messages" class="messages" aria-live="polite"></main>
+
+    <div id="starters" class="starters"></div>
+
+    <div class="composer">
+      <textarea id="input" rows="1" placeholder="Type your message... (Enter to send, Shift+Enter for a new line)"></textarea>
+      <button type="button" id="sendBtn" class="btn btn-primary">Send</button>
+    </div>
+  </div>
+
+  <!-- API key pop-up -->
+  <div id="keyModal" class="modal hidden">
+    <div class="modal-card">
+      <h2>Your Gemini API key</h2>
+      <p>Paste your key below. It is never saved in the website code. It stays in your browser only.</p>
+      <input type="password" id="keyInput" placeholder="Paste your API key here" autocomplete="off" />
+      <label class="remember">
+        <input type="checkbox" id="rememberBox" />
+        Remember on this device
+      </label>
+      <p id="keyStatus" class="key-status"></p>
+      <div class="modal-actions">
+        <button type="button" id="keyClear" class="btn btn-ghost">Remove key</button>
+        <button type="button" id="keyCancel" class="btn btn-ghost">Cancel</button>
+        <button type="button" id="keySave" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
